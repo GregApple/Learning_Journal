@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% from 'macros.html' import render_field %}
+
+{% block title %}New | {{ super() }}{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="new-entry">
+	    {% if form.errors %}
+        	{{form.errors}}
+            {% endif %}
+            <h2>New Entry</h2>
+            <form method ="POST" action = "" class="form">
+		{{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+		  {{ field.label }}
+                  {{ render_field(field) }}
+                {% endfor %}
+                <button type="submit" id="submit">Post!</button>
+                <a href="{{ url_for('index') }}" class="button button-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="/static/scripts.js"></script>
+{% endblock %}
+<-- https://stackoverflow.com/questions/10763139/is-there-a-way-to-hide-the-csrf-label-while-looping-through-form-using-flask-and -->

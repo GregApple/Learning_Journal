@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  {% for entry in entries%}
+      <article>
+          <h2><a href="/entries/{{ entry.id }}">{{ entry.title }}</a></h2>
+	  <time datetime="{{ entry.date }}">{{ entry.date.strftime("%m/%d/%Y") }}           
+      </article>
+  {% endfor %}
+{% endblock %}

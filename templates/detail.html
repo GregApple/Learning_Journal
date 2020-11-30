@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}Detail | {{ super() }}{% endblock %}
+{% block content %}
+<section>
+    <div class="container">
+        <div class="entry-list single">
+            <article>
+                <h1>{{ entry.title }}</h1>
+                <time datetime={{ entry.date }}>{{ entry.date.strftime("%m/%d/%Y") }}</time>
+		<p><a href="{{ url_for('delete', id=entry.id) }}" >Delete Entry</a></p>
+                <div class="entry">
+                    <h3>Time Spent: </h3>
+                    <p>{{ entry.time_spent }}</p>
+                </div>
+                <div class="entry">
+                    <h3>What You Learned:</h3>
+                    <p>{{ entry.what_you_learned}}</p>
+                </div>
+                <div class="entry">
+                    <h3>Resources to Remember:</h3>
+ 		    <p>{{ entry.resources_to_remember }}</p>
+                </div>
+            </article>
+        </div>
+    </div>
+    <div class="edit">
+        <p><a href="{{ url_for('update', id = entry.id) }}">Edit Entry</a></p>
+	
+    </div>
+</section>
+{% endblock %}

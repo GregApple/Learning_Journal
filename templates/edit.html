@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import render_edit%}
+
+{% block title %}Edit | {{ super() }}{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="edit-entry">
+            <h2>Edit Entry</h2>
+	    <a href="{{ url_for('delete', id=entry.id) }}" class="button button-secondary">Delete Entry</a><br><br>
+            <form method='POST' action="">
+		{{ form.hidden_tag() }}
+		{% if form.title.errors %}
+		{{form.title.errors}}
+		{% endif %}
+    			{{ render_edit(form.title, entry.title) }}
+		{% if form.date.errors %}
+		{{form.date.errors}}
+		{% endif %}
+                	{{ render_edit(form.date, entry.date) }}
+		{% if form.time_spent.errors %}
+		{{form.time_spent.errors}}
+		{% endif %}
+                	{{ render_edit(form.time_spent, entry.time_spent) }}
+		{% if form.what_you_learned.errors %}
+		{{form.what_you_learned.errors}}
+		{% endif %}
+                	{{ form.what_you_learned.label }}
+                	<textarea name="what_you_learned" id="what you learned">{{ entry.what_you_learned }}</textarea><br>
+		{% if form.resources_to_remember.errors %}
+		{{form.resources_to_remember.errors}}
+		{% endif %}
+                	{{ form.resources_to_remember.label }}
+                	<textarea name="resources_to_remember" id="resources to remember">{{ entry.resources_to_remember}}</textarea><br>
+		
+		<button type="submit" id="submit">Update Entry!</button>
+                <a href="{{ url_for('detail', id=entry.id) }}" class="button button-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
